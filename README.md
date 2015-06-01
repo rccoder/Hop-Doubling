@@ -1,14 +1,71 @@
-README For Software
+README For Hop-Doubling
 ===
-图G(V, E) Directed
+一些看paper时的思索
+---
+2-hop-labling
 
-Input: |E|+1 Line ->
-  First Line: the number of the |V|
-  other Lines: |E| lines, Include 3 number -> u, v, d
+u, v
 
-Others:
-  vertex is a int in [0, |V|-1]
-  each line is a small length
+w
 
-Input Files:
-  data.txt
+通过w找到uv之间的最小值
+
+假如不存在其他的w使得还有更小的值，我们就做一个定义，v, u is convered by w
+
+于是，我们就可以得到最短距离。。两个相加即可
+
+2-hop-cover
+
+我们的目的就是找到这样最小的2-hop conver
+
+这是一个NP问题，近似贪心的话代价也是非常大的，有一篇论文专门说明了这个问题
+
+文章出现了一个观点，rank，可以对之前的东西进行一定的优化，或许就是能够提供一个比较好的思路
+
+然后给了两个比较简单的例子，主要讲的是选取适当的pivot就可以取到更小的label set
+
+
+选取的方式就是找度比较大的那个点
+
+于是，我们就可以根据这个做一个算法
+
+
+解决思路
+
+设置一个全局的r()，记录每个点的rank，就是每个点的度数，默认是按照倒序排列的
+
+权威的label
+
+u是v出的中心。。。。存在u到w，然后v的r是在v到w之间最高的。。
+
+
+一个比较正式的定义
+
+(v, d) in Lout(u)
+
+在u出和v进之间找到，如果我们可以找到一个更高的rank 的v1,然后有条path, u, v1, v,...他的长度小于d
+
+事实证明，这种做法特别有效，真的
+
+后边，出现了两个问题，一个就是在一些规则之上生成一些label,一个就是reduce label size
+
+后米啊的一个问题暂且放一下，更重要的就是第一个
+
+分析完了。。。算法来了
+
+有向无权图G （V，E）
+
+r(vi) = i
+
+简单嘛
+
+倒序，前面应该是正的
+
+v1就有着最高的度
+
+有相同度的点之间断绝关系
+
+度不是最小的
+
+rank小于两个之间的最大值
+
