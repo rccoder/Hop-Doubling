@@ -281,7 +281,7 @@ void findDistance(int n1, int n2, GRAPH G, LABEL *all)
     {
         if(n1 == all[i].v1 && n2 == all[i].v2)
         {
-            cout << "The Distance from" << n1 << "to" << n2 << "is" << all[i].d << endl;
+            cout << "The Distance from " << n1 << " to " << n2 << " is " << all[i].d << endl;
             flag = 0;
             break;
         }
@@ -294,7 +294,7 @@ void findDistance(int n1, int n2, GRAPH G, LABEL *all)
             //cout << i << "  " << j << endl;
             if(n1 == all[i].v1 && n2 == all[j].v2 && all[i].v2 == all[j].v1)
             {
-                cout << "The Distance from" << n1 << "to" << n2 << "is" << all[i].d+all[j].d << endl;
+                cout << "The Distance from " << n1 << " to " << n2 << " is " << all[i].d+all[j].d << endl;
                 flag = 0;
                 break;
             }
@@ -306,7 +306,7 @@ void findDistance(int n1, int n2, GRAPH G, LABEL *all)
     }
     if (flag)
     {
-        cout << "The Distance from" << n1 << "to" << n2 << "is" << "too long" << endl;
+        cout << "The Distance from " << n1 << " to " << n2 << " is " << "too long" << endl;
     }
 }
 
