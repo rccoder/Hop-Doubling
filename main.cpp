@@ -10,7 +10,7 @@
 #include <memory.h>
 #include <algorithm>
 
-#define N 500
+#define N 210
 #define M 1000000
 #define T 100
 #define MAXDISTANCE 10000
@@ -55,7 +55,7 @@ struct node
 {
     int  num;
     int index;
-} r[100];
+} r[M];
 
 /*
  * preLabel allLabel的集合个数，全局变量
@@ -346,32 +346,34 @@ void findDistance(int n1, int n2, GRAPH G, LABEL *all)
     {
         if(n1 == all[i].v1 && n2 == all[i].v2)
         {
-            cout << "The Distance from" << n1 << "to" << n2 << "is" << all[i].d << endl;
+            cout << "The Distance from " << n1 << " to " << n2 << " is " << all[i].d << endl;
             flag = 0;
             break;
         }
     }
-
-    for(int i = 0; i < allN; i++)
-    {
-        for(int j = 0; j < allN; j++)
+    if(flag)
+    {    
+        for(int i = 0; i < allN; i++)
         {
-            //cout << i << "  " << j << endl;
-            if(n1 == all[i].v1 && n2 == all[j].v2 && all[i].v2 == all[j].v1)
+            for(int j = 0; j < allN; j++)
             {
-                cout << "The Distance from" << n1 << "to" << n2 << "is" << all[i].d+all[j].d << endl;
-                flag = 0;
+                //cout << i << "  " << j << endl;
+                if(n1 == all[i].v1 && n2 == all[j].v2 && all[i].v2 == all[j].v1)
+                {
+                    cout << "The Distance from " << n1 << " to " << n2 << " is " << all[i].d+all[j].d << endl;
+                    flag = 0;
+                    break;
+                }
+            }
+            if(!flag)
+            {
                 break;
             }
-        }
-        if(!flag)
-        {
-            break;
         }
     }
     if (flag)
     {
-        cout << "The Distance from" << n1 << "to" << n2 << "is" << "too long" << endl;
+        cout << "The Distance from " << n1 << " to " << n2 << " is " << "too long" << endl;
     }
 }
 
@@ -379,14 +381,14 @@ int main()
 {
     GRAPH G;//假定最多有N组数据
     LABEL pre[N], all[N];
-    freopen("a.txt", "r", stdin);
+    freopen("data.txt", "r", stdin);
     initGraph(G);
     scanfGraph(G);
     //printGraph(G);
     getRank(G);
     initLabel(G, pre, all);
     start(G, pre, all);
-    int n1, n2;
+    int n1 = 0, n2 = 0;
     findDistance(n1, n2, G, all);
     return 0;
 }
